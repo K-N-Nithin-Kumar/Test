@@ -1,0 +1,48 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container" style="margin-top:130px; width:1050px;">
+    <div class="p-4 m-4" style= "border-radius:10px;">
+        <div class="mx-auto col-lg-5">
+            <h3 class="alert alert-light">Create a Account</h3>
+            <form action="/signup/" method="POST">
+                {% csrf_token %}
+                {% if error %}
+               <div class="alert alert-danger" role="alert">
+                   {{error}}
+               </div>
+               {% endif %}
+                <!-- firstname -->
+                <div class="form-group">
+                  <label for=""></label>
+                  <input type="text" style="height:35px" class="form-control" name="firstname" id="" value="{{values.first_name}}" aria-describedby="emailHelpId" placeholder="firstname" required>
+                </div>
+                <!-- lastname -->
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" style="height:35px"  class="form-control" name="lastname" id="" value="{{values.last_name}}" aria-describedby="emailHelpId" placeholder="lastname" required>
+                  </div>
+              <!--phone number-->
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" style="height:35px" class="form-control" name="phone" id="" value="{{values.phone}}" aria-describedby="emailHelpId" placeholder="phone number" required>
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="email" style="height:35px" class="form-control " name="email" id="" value="{{values.email}}" aria-describedby="emailHelpId" placeholder="example@gmail.com">
+                </div>
+                <!-- password-->
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="password" style="height:35px"  class="form-control" name="password" id="" aria-describedby="emailHelpId" placeholder="*****" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" value="Create an account">Create an account</button>
+                <p>already have an account<a href="/login">click here</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
