@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation</title>
+</head>
+<body>
+    <button id="show" class="btn"></button>
+    <div id="message"></div>
+
+    <script>
+        (()=>{
+           const message = document.querySelector('#message');
+           if(!navigator.geolocation)
+           {
+            message.textContent = `Browser is not supported`;
+            message.classList.add = 'Error';
+            return;
+           }
+           const btn = document.getElementById(btn);
+           btn.addEventListener('click',()=>{
+            navigator.geolocation.getCurrentPosition(onSuccess , onError);
+           })
+
+           function onError(position)
+           {
+              const{latitude , longitude} =position.coords;
+              message.textContent = `Latitude : ${latitude} , Longitude : ${longitude}`;
+              message.classList.add("Success");
+           }
+
+           function onError()
+           {
+            message.textContent = `failed to fetch the location`;
+            message.classList.add("Error");
+           }
+        });
+    </script>
+</body>
+</html>

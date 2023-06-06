@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USN Verification</title>
+</head>
+
+<body>
+    <label>Enter the User USN:</label>
+    <input id="inp" />
+    <button id="btn">Submit</button>
+
+
+
+    <script>
+        const button = document.getElementById("btn");
+        const input = document.getElementById("inp");
+
+        button.addEventListener("click", () => {
+            const usn = input.value;
+
+            const usnregEx = /1NT/i;
+            let result = 0;
+            let res = usnregEx.test(usn);
+            if(res && usn.length==10) result = "Valid";
+            else result = "Invalid";
+            alert("The Entered USN is " + result);
+        })
+    </script>
+</body>
+
+</html>
