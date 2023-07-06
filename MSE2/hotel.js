@@ -1,36 +1,53 @@
-function bookFlight() {
-    return new Promise((resolve, reject) => {
-      // Simulating flight booking with a delay of 2 seconds
-      setTimeout(() => {
-        console.log('Flight booked successfully');
-        resolve();
-      }, 2000);
+function bookflight()
+{
+    return new Promise((resolve,reject)=>
+    {
+        setTimeout(()=>
+        {
+            const flightbooked = false;
+            if(flightbooked)
+            {
+                console.log("Flight is booked");
+                resolve();
+            }
+            else{
+                reject("Flight booking failed");
+            }
+        },1000)
     });
-  }
-  
-  function bookHotel() {
-    return new Promise((resolve, reject) => {
-      // Simulating hotel booking with a delay of 2 seconds
-      setTimeout(() => {
-        console.log('Hotel booked successfully');
-        resolve();
-      }, 2000);
-    });
-  }
-  
-  function bookFlightAndHotel() 
-  {
-    bookFlight().then(() =>
-     {
+}
+function bookHotel()
+{
+    return new Promise((resolve,reject)=>
+    {
+        setTimeout(()=>
+        {
+            const hotelbooked = true;
+            if(hotelbooked)
+            {
+                console.log("Hotel is booked");
+                resolve();
+            }
+            else{
+                reject("Hotel booking failed");
+            }
+        },2000);
+    }
+    )
+}
+bookflight().then(
+    ()=>
+    {
         return bookHotel();
-      }).then(() => 
-      {
-        console.log('Booking completed successfully');
-      }).catch((error) => 
-      {
-        console.log('Error while booking:', error);
-      });
-  }
-  
-  // Calling the function to book flight and hotel
-  bookFlightAndHotel();
+    }
+).then(
+    ()=>
+    {
+        console.log("Everything booked successfully");
+    }
+).catch(
+    ()=>
+    {
+        console.log("Error occured while booking");
+    }
+)
