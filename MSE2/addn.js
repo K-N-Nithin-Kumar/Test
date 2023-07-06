@@ -1,49 +1,61 @@
-// Function to perform arithmetic operations asynchronously
-function performOperation( a, b) {
-    return new Promise((resolve, reject) => {
-
-        setTimeout(()=>{
-            let arr = [a+b , '+']
-            console.log(`The result of ${a} ${arr[1]} ${b} is ${arr[0]}`);
-            resolve(arr);
-        },1000);
-
-        setTimeout(()=>{
-            let arr = [a-b , '-']
-            console.log(`The result of ${a} ${arr[1]} ${b} is ${arr[0]}`);
-            resolve(arr);
-            
-        },2000);
-
-        setTimeout(()=>{
-            let arr = [a*b , '*']
-            console.log(`The result of ${a} ${arr[1]} ${b} is ${arr[0]}`);
-            resolve(arr);
-        },3000);
-
-        setTimeout(()=>{
-            if(b!==0)
-            {
-                arr = [a/b , '/']
-                console.log(`The result of ${a} ${arr[1]} ${b} is ${arr[0]}`);
-                resolve(arr);
-            }
-            else reject("Zero divsion error");
-        },4000);
-     });
+function add(a, b)
+ {
+    return new Promise((resolve) => 
+    {
+      setTimeout(() =>
+     {
+        resolve(a + b);
+      }, 10);
+    });
   }
   
-  // Function to display the result synchronously using await
-  async function displayResult( a, b) {
+  function subtract(a, b) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(a - b);
+      }, 1500);
+    });
+  }
+  
+  function multiply(a, b) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(a * b);
+      }, 1200);
+    });
+  }
+  
+  function divide(a, b) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (b === 0) {
+          reject("Division by zero is not allowed.");
+        } else {
+          resolve(a / b);
+        }
+      }, 2000);
+    });
+  }
+  
+  const num1 = parseFloat(prompt("Enter the first number:"));
+  const num2 = parseFloat(prompt("Enter the second number:"));
+  
+  async function performOperations() {
     try {
-          await performOperation(a, b);
-    } 
-    catch (error) {
-      console.log('Error:', error);
+      const additionResult = await add(num1, num2);
+      console.log("Addition result:"+additionResult);
+  
+      const subtractionResult = await subtract(num1, num2);
+      console.log("Subtraction result:", subtractionResult);
+  
+      const multiplicationResult = await multiply(num1, num2);
+      console.log("Multiplication result:", multiplicationResult);
+  
+      const divisionResult = await divide(num1, num2);
+      console.log("Division result:", divisionResult);
+    } catch (error) {
+      console.log("Error:", error);
     }
   }
   
-  // Call
-  displayResult( 5, 3);
-  
-  
+  performOperations();
