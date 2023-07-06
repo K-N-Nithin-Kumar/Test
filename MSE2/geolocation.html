@@ -4,50 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Geolocation Demo</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <div class="container">
-        <button id="show" class="btn">Show my location</button>
-        <div id="message"></div>
-    </div> 
+    <button id="btn">Get Location</button>
+    <div id="message"></div>
+
     <script>
         (() => {
-            const message = document.querySelector('#message');
-            // check if the Geolocation API is supported
+            const message = document.querySelector("#message");
+            const button = document.getElementById('btn');
+
             if (!navigator.geolocation) {
-                message.textContent = `Your browser doesn't support Geolocation`;
-                message.classList.add('error');
+                message.classList.add("error")
+                alert("Your Browser Doesnot suport Geolocation");
                 return;
             }
 
-            // handle click event
-            const btn = document.querySelector('#show');
-            btn.addEventListener('click', function() {
-                // get the current position
+            button.addEventListener('click', () => {
+                console.log("hi")
                 navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            });
+            })
 
-
-            // handle success case
             function onSuccess(position) {
-                const {
-                    latitude,
-                    longitude
-                } = position.coords;
+                const { latitude, longitude } = position.coords;
+                message.textContent = `The current position latitude is ${latitude} and longitude is ${longitude}`;
 
-                message.classList.add('success');
-                message.textContent = `Your location: (${latitude},${longitude})`;
+                message.classList.add("sucess");
+
             }
 
-            // handle error case
             function onError() {
-                message.classList.add('error');
-                message.textContent = `Failed to get your location!`;
+                message.classList.add("error");
+                alert("Could Not Fetch Location")
             }
-        });
+
+
+        })();
     </script>
+
+
+
 </body>
 
 </html>
